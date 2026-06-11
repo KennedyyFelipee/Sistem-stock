@@ -254,3 +254,49 @@ a { color: inherit; text-decoration: none; }
   transition: all 0.15s;
 }
 .add-item-btn:hover { border-color: var(--primary); color: var(--primary); }
+
+.dashboard-filters {
+  display: flex;
+  gap: 30px;
+  padding: 25px;
+  background: white;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin-bottom: 25px;
+  max-width: 100%;
+}
+
+.filter-group {
+  flex: 1;
+  min-width: 200px;
+}
+
+.filter-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #34495e;
+  font-size: 14px;
+}
+
+.filter-group select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  background: white;
+  color: #2c3e50;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.filter-group select:hover,
+.filter-group select:focus {
+  border-color: var(--primary);
+  outline: none;
+}
+
+.dashboard-graph-container {
+  margin-bottom: 25px;
+}

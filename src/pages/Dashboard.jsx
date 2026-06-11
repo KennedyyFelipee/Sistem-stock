@@ -26,7 +26,6 @@ export default function Dashboard() {
 
   if (loading) return <div className="loading">Carregando...</div>
 
-  // Produtos mais/menos vendidos (por movimentações de saída)
   const exitMovements = movements.filter(m => m.movement_type === 'exit')
   const soldMap = {}
   exitMovements.forEach(m => {
@@ -35,15 +34,26 @@ export default function Dashboard() {
   const sorted = Object.entries(soldMap).sort((a, b) => b[1] - a[1])
   const mostSold  = sorted[0]?.[0] || (products[0]?.name || '—')
   const leastSold = sorted[sorted.length - 1]?.[0] || (products[products.length - 1]?.name || '—')
-
   const recentMoves = movements.slice(0, 5)
 
   return (
     <div>
+      <div className="dashboard-graph-container">
+        <iframe 
+          src="http://localhost:8050/" 
+          style={{
+            width: '100%',
+            height: '700px',
+            border: 'none',
+            borderRadius: 'var(--radius)',
+            boxShadow: 'var(--shadow)'
+          }}
+          title="Gráfico de Vendas"
+        />
+      </div>
+
       <div className="dashboard-grid">
-        {/* Left column */}
         <div className="dashboard-left">
-          {/* Card, Quantidade total */}
           <div className="info-card">
             <div className="info-card-header">
               <div className="info-card-icon">
@@ -58,7 +68,6 @@ export default function Dashboard() {
             <div className="info-card-value">{products.length} produtos cadastrados</div>
           </div>
 
-          {/* Card, Estoque baixo */}
           <div className="info-card">
             <div className="info-card-header">
               <div className="info-card-icon">
@@ -75,7 +84,6 @@ export default function Dashboard() {
           </div>
         </div>
 
-        {/* Right column */}
         <div className="dashboard-right">
           <button className="action-btn" onClick={() => navigate('/products')}>
             <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
@@ -91,9 +99,7 @@ export default function Dashboard() {
           </button>
         </div>
 
-        {/* Bottom row */}
         <div className="dashboard-bottom">
-          {/* Mais/Menos vendidos */}
           <div className="bottom-card">
             <div className="bottom-card-header">
               <div className="info-card-icon">
@@ -120,7 +126,6 @@ export default function Dashboard() {
             </div>
           </div>
 
-          {/* Últimas movimentações */}
           <div className="bottom-card">
             <div className="bottom-card-header">
               <div className="info-card-icon">
