@@ -4,7 +4,7 @@ import pandas as pd
 from database import get_vendas_mensais
 
 # Inicializa o Dash
-app = Dash(__name__)
+app = Dash(__name__, url_base_pathname='/dashboard/')
 
 # --- 1. CARREGAMENTO E PREPARAÇÃO DOS DADOS ---
 df = get_vendas_mensais(1)
@@ -126,6 +126,9 @@ def atualizar_grafico(produto_sel, mes_sel):
 
     return fig
 
-# Inicializa o servidor local
+# Servidor WSGI (usado pelo gunicorn em produção)
+server = app.server
+
+# Execução local (dev)
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False, host='0.0.0.0', port=8050)

@@ -1,9 +1,20 @@
+import os
 import pandas as pd
+from dotenv import load_dotenv
 from sqlalchemy import create_engine
+from urllib.parse import quote_plus
 
-# Conexão com o banco de dados local (XAMPP)
-# Altere 'root' e a senha se o seu MySQL tiver configurações diferentes
-engine = create_engine("mysql+pymysql://root:@localhost/sistem_estoque")
+load_dotenv()
+
+DB_HOST = os.environ["DB_HOST"]
+DB_PORT = os.environ.get("DB_PORT", "3306")
+DB_NAME = os.environ["DB_NAME"]
+DB_USER = os.environ["DB_USER"]
+DB_PASS = quote_plus(os.environ["DB_PASS"])
+
+engine = create_engine(
+    f"mysql+pymysql://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+)
 
 def get_vendas_mensais(id_usuario):
     # Query SQL trazendo os dados necessários e renomeando as colunas
