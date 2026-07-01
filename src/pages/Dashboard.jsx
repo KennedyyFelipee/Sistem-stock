@@ -40,7 +40,7 @@ export default function Dashboard() {
     <div>
       <div className="dashboard-graph-container">
         <iframe 
-          src="http://localhost:8050/" 
+          src="http://44.217.81.127/dashboard/"
           style={{
             width: '100%',
             height: '700px',
